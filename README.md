@@ -1,74 +1,51 @@
-# Hola, soy Maria Victoria P. Sitzer 👋
+# Líder Técnica y Estratega de Datos | Auditoría de Integridad y Salud
 
-## Líder Técnica y Estrategia de Datos | Ingeniería y Auditoría aplicada a la Salud | Auditoría de Integridad
-
-<p align="left">
-  <img src="https://img.shields.io/badge/Status-Líder_Técnica-blue?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Focus-Salud_&_Diabetes-red?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Specialty-Big_Data_&_Audit-green?style=for-the-badge" />
-</p>
+Ingeniería de Sistemas, Analítica Visual y Big Data. Mi enfoque profesional se centra en el diseño de arquitecturas de datos robustas, la gobernanza e integridad del dato antes del modelado, y el desarrollo de soluciones analíticas aplicadas a sistemas de salud y auditoría pública. Con una metodología estructurada de desarrollo, lidero y audito pipelines que transforman datos crudos y sesgados en activos de conocimiento con validez científica e institucional.
 
 ---
 
-### 📑 Sobre mí
+## 🎓 Formación Académica
 
-Soy una profesional enfocada en la **Arquitectura de Confianza** y la **Gobernanza de Datos**. Mi trabajo combina la ingeniería de datos con el rigor de la auditoría para garantizar que la información en sistemas críticos (Salud y Sector Público) sea íntegra, veraz y segura.
-
-* **Liderazgo Estratégico:** Experiencia seleccionando arquitecturas y mentorizando equipos técnicos en la implementación de frameworks de calidad.
-* **Auditoría de Integridad:** Especializada en la validación de datos masivos y cumplimiento normativo para la prevención de fraude.
-* **Investigación en Salud:** Mi objetivo principal es aplicar **Visual Analytics y Big Data** en el análisis de patologías crónicas como la **Diabetes**.
+*   [Ingeniería en Sistemas](https://www.techtitute.com/es-ar/informatica/pregrado/ingenieria-en-informatica) – Título equivalente en USA: Bachelor of Science in Information Technology | Nº RVOE: 20210871 | Fecha acuerdo RVOE: 07/05/2021 | Finalización estimada: Octubre 2026
+*   [Máster en Analítica Visual y Big Data](https://www.techtitute.com/es-ar/informatica/maestria/visual-analytics-y-big-data) – Máster título propio en Visual Analytics y Big Data | 60 ECTS | Concluido, 2025
+*   [Máster en Analítica Visual y Big Data](https://www.techtitute.com/es-ar/informatica/maestria-oficial/analisis-visual-y-macrodatos) – Título equivalente en USA: Master of Science in Data Analytics | Nº RVOE: 20232095 | Fecha acuerdo RVOE: 24/07/2023 | Finalización estimada: 2027
 
 ---
 
-### 🚀 Áreas de Especialización
+## 🛠️ Herramientas y Tecnologías (Skills & Stacks)
 
-| Estrategia y Gestión | Ingeniería y Big Data | Auditoría y Calidad |
-| :--- | :--- | :--- |
-| Liderazgo Técnico (Tech Lead) | Visual Analytics Avanzado | Auditoría de Integridad de Datos |
-| Gobernanza de Datos | Arquitectura de Macrodatos | Prevención de Fraude en Sistemas |
-| Estrategia de Datos en Salud | Python & Ecosistema Data | Cumplimiento Normativo (LGPD) |
+Organizo mi stack tecnológico de manera arquitectónica según el ciclo de vida del dato y la madurez del desarrollo:
 
----
-
-### 🔬 Proyectos Destacados de Auditoría y Liderazgo
-
-#### 🛡️ [Auditoría de Frameworks de QA & Integridad](enlace-a-tu-repo)
-* **Rol:** Líder Técnica y Auditora.
-* **Descripción:** Supervisión y selección estratégica de arquitecturas para la validación automática de datos masivos. Auditoría de resultados para garantizar evidencias legales de integridad.
-
-#### 📊 [Análisis Visual aplicado a la Salud (Diabetes)](enlace-a-tu-repo)
-* **Rol:** Investigadora de Datos.
-* **Descripción:** Implementación de modelos de Visual Analytics para la identificación de patrones en datos de pacientes crónicos.
+*   **Data Engineering & Governance:** Python, SQL, control de flujos de datos inmutables, aserciones formales y validación de datos (Great Expectations).
+*   **Visual Analytics & Business Intelligence:** Power BI, Tableau, diseño de dashboards avanzados basados en analítica visual y patrones de consumo ejecutivo.
+*   **Quality Assurance & Automation:** Playwright, Cypress, frameworks de pruebas automatizadas aplicadas a la verificación de plataformas de datos y scraping de integridad.
+*   **Idiomas:** Español (Nativo) | Portugués (C2) | Inglés (B2) | Hebreo | Chino (En estudio)
 
 ---
 
-### 🎓 Formación y Certificaciones
+## 🔬 Proyectos Destacados
 
-* **Ingeniería de Sistemas** - TECH Universidad Tecnológica (En curso)
-* **Máster en Visual Analytics e Big Data** - TECH Universidad Tecnológica
-* **Candidata a Maestría Oficial en Análisis Visual y Macrodatos** (MSc in Data Analytics)
+### 📁 Pipeline de Auditoría de Integridad: Continuum Metabólico (DM2 ↔ SOP)
+**Enfoque:** Ingeniería de Datos y Auditoría aplicada a la Salud  
+**Repositorio:** [dm2-sop-auditoria-mdp](https://github.com/mvikips/dm2-sop-auditoria-mdp)
 
----
+Este ecosistema de datos es un pipeline de producción que aborda el Síndrome de Ovario Poliquístico (SOP) y la Diabetes Mellitus Tipo 2 (DM2) como un continuo metabólico, corrigiendo las limitaciones metodológicas de datasets clínicos públicos.
 
-### 🛠️ Herramientas y Tecnologías
-
-<p align="left">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/SQL-4479A1?style=flat&logo=postgresql&logoColor=white" />
-  <img src="https://img.shields.io/badge/Power_BI-F2C811?style=flat&logo=power-bi&logoColor=black" />
-  <img src="https://img.shields.io/badge/Big_Data-011E3C?style=flat&logo=databricks&logoColor=white" />
-  <img src="https://img.shields.io/badge/Selenium-43B02A?style=flat&logo=selenium&logoColor=white" />
-  <img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white" />
-</p>
+*   **Auditoría de Integridad del Dato:** Implementación de una capa de aserciones clínicas (Great Expectations) para aislar y transformar registros imposibles (ceros en glucosa plasmática, presión diastólica e insulina) en variables de datos faltantes estructurales (`NaN`).
+*   **Interpretabilidad y Perspectiva de Género:** Modelado predictivo comparativo evaluado mediante métricas clínicas estrictas (AUC-ROC, Recall, F1-Score) e integrando SHAP values para auditar el peso de las variables ginecológicas en la predicción del riesgo metabólico.
+*   **Anclaje y Aplicabilidad Local:** Incorporación de un análisis de brechas (*gap analysis*) orientado al sistema de atención primaria de Mar del Plata, evaluando la disponibilidad de las variables del modelo en las historias clínicas electrónicas locales frente a antecedentes epidemiológicos de la región.
 
 ---
 
-### 📫 Conectemos
-* [LinkedIn](tu-enlace-a-linkedin)
-* [Portafolio Web](tu-enlace-si-tienes)
-* 📧 Email: [tu-email]
+## 📐 Filosofía de Trabajo
+
+*   **El dato se audita antes de modelar:** Ningún algoritmo de Machine Learning subsana un dato clínicamente imposible o un sesgo de representación de origen.
+*   **Todo proceso es medible y graficable:** La analítica visual no es estética; es la interfaz de comunicación entre la infraestructura de datos compleja y la toma de decisiones estratégicas.
 
 ---
-<p align="center">
-  <i>"Transformando datos en integridad, y tecnología en salud."</i>
-</p>
+
+## 📬 Contacto y Canales Profesionales
+
+*   [Site](https://mvikips.github.io)
+*   [LinkedIn](https://linkedin.com/in/mariavictoriaperera) 
+*   [Email](mailto:y6d3y69e@gmail.com) 
