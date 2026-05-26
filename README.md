@@ -14,8 +14,6 @@ Ingeniería de Sistemas, Analítica Visual y Big Data. Mi enfoque profesional se
 
 ## 🛠️ Herramientas y Tecnologías (Skills & Stacks)
 
-Organizo mi stack tecnológico de manera arquitectónica según el ciclo de vida del dato y la madurez del desarrollo:
-
 *   **Data Engineering & Governance:** Python, SQL, control de flujos de datos inmutables, aserciones formales y validación de datos (Great Expectations).
 *   **Visual Analytics & Business Intelligence:** Power BI, Tableau, diseño de dashboards avanzados basados en analítica visual y patrones de consumo ejecutivo.
 *   **Quality Assurance & Automation:** Playwright, Cypress, frameworks de pruebas automatizadas aplicadas a la verificación de plataformas de datos y scraping de integridad.
