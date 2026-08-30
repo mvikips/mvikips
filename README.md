@@ -1,4 +1,4 @@
-# Líder Técnica y Estratega de Datos | Auditoría de Integridad y Salud
+# Data Architect, Steward & Governant
 
 Ingeniería de Sistemas, Analítica Visual y Big Data. Mi enfoque profesional se centra en el diseño de arquitecturas de datos robustas, la gobernanza e integridad del dato antes del modelado, y el desarrollo de soluciones analíticas aplicadas a sistemas de salud y auditoría pública. Con una metodología estructurada de desarrollo, lidero y audito pipelines que transforman datos crudos y sesgados en activos de conocimiento con validez científica e institucional.
 
