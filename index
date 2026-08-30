@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>María Victoria Perera</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --surface2: #1e1e1e;
+      --text: #f0ece4;
+      --muted: #888;
+      --accent: #c8a96e;
+      --accent2: #e8d5b0;
+      --line: rgba(200, 169, 110, 0.2);
+      --wa: #25D366;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: rgba(14,14,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.05rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ─── LANG SWITCHER ─── */
+    .lang-switcher {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .lang-btn {
+      background: none;
+      border: 1px solid transparent;
+      color: var(--muted);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.65rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      border-radius: 2px;
+    }
+
+    .lang-btn:hover { color: var(--accent2); border-color: var(--line); }
+    .lang-btn.active { color: var(--accent); border-color: var(--accent); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 10rem 3rem 5rem;
+      overflow: hidden;
+    }
+
+    .hero-line {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+      opacity: 0.3;
+      left: 2rem;
+    }
+
+    .hero-circle {
+      position: absolute;
+      right: -200px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      opacity: 0.4;
+      animation: rotate 40s linear infinite;
+    }
+
+    .hero-circle::after {
+      content: '';
+      position: absolute;
+      inset: 60px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+    }
+
+    @keyframes rotate { to { transform: translateY(-50%) rotate(360deg); } }
+
+    .quote-block {
+      max-width: 650px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s ease forwards;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--accent2);
+    }
+
+    .quote-author {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      line-height: 1.05;
+      opacity: 0;
+      animation: fadeUp 1s 0.6s ease forwards;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      margin-top: 1rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeUp 1s 0.9s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    main {
+      position: relative;
+      z-index: 1;
+      padding: 0 3rem 4rem;
+      max-width: 900px;
+    }
+
+    .section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.4;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .section-body {
+      font-size: 0.95rem;
+      color: #bbb;
+      line-height: 1.9;
+      max-width: 640px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--line);
+      margin-bottom: 4rem;
+    }
+
+    /* ─── WHATSAPP BUTTON (floating) ─── */
+    .wa-fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      width: 56px;
+      height: 56px;
+      background: var(--wa);
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .wa-fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+    }
+
+    .wa-fab svg { width: 28px; height: 28px; fill: white; }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(6px);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2.5rem;
+      width: min(90vw, 420px);
+      transform: translateY(20px);
+      transition: transform 0.3s;
+    }
+
+    .modal-overlay.open .modal { transform: none; }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+      color: var(--accent2);
+    }
+
+    .modal-sub {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .field {
+      margin-bottom: 1.4rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .field input, .field textarea {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      padding: 0.7rem 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+
+    .field input:focus, .field textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .char-counter {
+      text-align: right;
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    .char-counter.warn { color: #e07a5f; }
+
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.8rem;
+    }
+
+    .btn-send {
+      flex: 1;
+      background: var(--wa);
+      border: none;
+      border-radius: 2px;
+      color: white;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.85rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-send:hover { opacity: 0.88; }
+
+    .btn-cancel {
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      color: var(--muted);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.2rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-cancel:hover { border-color: var(--muted); color: var(--text); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--line);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-copy {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.4rem;
+      align-items: center;
+    }
+
+    .social-link {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .social-link:hover { color: var(--accent); }
+
+    .social-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .social-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 640px) {
+      header { padding: 1rem 1.2rem; }
+      .hero { padding: 8rem 1.5rem 4rem; }
+      main { padding: 0 1.5rem 3rem; }
+      footer { padding: 1.5rem 1.5rem; flex-direction: column; align-items: flex-start; }
+      .social-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">mvikips</div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="es" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" data-lang="pt" onclick="setLang('pt')">PT</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-line"></div>
+  <div class="hero-circle"></div>
+
+  <div class="quote-block">
+    <p class="quote-text" data-i18n="quote">"La tarea de la ciencia es describir los movimientos de la naturaleza de la manera más completa y simple posible."</p>
+    <span class="quote-author">— G. Kirchhoff</span>
+  </div>
+
+  <h1 class="hero-name">María<br><em>Victoria</em></h1>
+  <p class="hero-tagline" data-i18n="tagline">Data · Tecnología · Vida</p>
+</section>
+
+<!-- MAIN -->
+<main>
+
+  <div class="section" id="s-who">
+    <div class="section-label" data-i18n="label-who">01 — Quién soy</div>
+    <h2 class="section-title" data-i18n="title-who">¿Quién soy?</h2>
+    <p class="section-body" data-i18n="body-who">Ingeniera en sistemas, especialista en análisis de datos y Big Data. Me encanta dar clases y uso mi formación tecnológica para armar mis propios proyectos y emprender en paralelo. No me rindo con nada.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s-causes">
+    <div class="section-label" data-i18n="label-causes">02 — Ideología</div>
+    <h2 class="section-title" data-i18n="title-causes">Ideología &amp; Causas</h2>
+    <p class="section-body" data-i18n="body-causes">Comprometida al 100% con las causas sociales, el medioambiente y los animales.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s-sport">
+    <div class="section-label" data-i18n="label-sport">03 — Disciplinas</div>
+    <h2 class="section-title" data-i18n="title-sport">Mis Disciplinas &amp; Deporte</h2>
+    <p class="section-body" data-i18n="body-sport">Practico Kung Fu, boxeo y salgo a correr. Además, me encantaría gestionar mi Diabetes con la misma rigurosidad con la que mido y grafico un pipeline de datos.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s-care">
+    <div class="section-label" data-i18n="label-care">04 — Estética</div>
+    <h2 class="section-title" data-i18n="title-care">Estética &amp; Autocuidado</h2>
+    <p class="section-body" data-i18n="body-care">Me encanta el autocuidado. Mi casa es mi templo; me fascina la decoración, mantener todo limpio, cocinar y cuidar mis plantas.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s-books">
+    <div class="section-label" data-i18n="label-books">05 — Cultura</div>
+    <h2 class="section-title" data-i18n="title-books">Libros, Idiomas &amp; Viajes</h2>
+    <p class="section-body" data-i18n="body-books">Amo viajar y conocer culturas de primera mano. Estudio idiomas activamente, escribo y leo mucho (sobre todo narrativas existenciales y de alienación).</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section" id="s-spirit">
+    <div class="section-label" data-i18n="label-spirit">06 — Espiritualidad</div>
+    <h2 class="section-title" data-i18n="title-spirit">Espiritualidad</h2>
+    <p class="section-body" data-i18n="body-spirit">Me apasiona cruzar e investigar muchísimas cosmogonías y religiones antiguas.</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy" data-i18n="footer-copy">&copy; 2025 María Victoria</div>
+  <div class="social-links">
+
+    <a href="https://github.com/mvikips" target="_blank" rel="noopener" class="social-link" title="GitHub">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      <span class="social-label">GitHub</span>
+    </a>
+
+    <a href="https://linkedin.com/in/mariavictoriaperera" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      <span class="social-label">LinkedIn</span>
+    </a>
+
+    <a href="https://instagram.com/mvikips" target="_blank" rel="noopener" class="social-link" title="Instagram">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      <span class="social-label">Instagram</span>
+    </a>
+
+    <a href="https://medium.com/@y6d3y69e" target="_blank" rel="noopener" class="social-link" title="Blog">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+      <span class="social-label">Blog</span>
+    </a>
+
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<button class="wa-fab" onclick="openModal()" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <h2 class="modal-title" data-i18n="modal-title">Hablemos</h2>
+    <p class="modal-sub" data-i18n="modal-sub">vía WhatsApp</p>
+
+    <div class="field">
+      <label data-i18n="field-name">Nombre</label>
+      <input type="text" id="f-name" autocomplete="off" />
+    </div>
+
+    <div class="field">
+      <label data-i18n="field-entity">Entidad / Empresa</label>
+      <input type="text" id="f-entity" autocomplete="off" />
+    </div>
+
+    <div class="field">
+      <label data-i18n="field-msg">Mensaje <span style="color:var(--muted)">(máx. 20 caracteres)</span></label>
+      <textarea id="f-msg" rows="2" maxlength="20" oninput="updateCounter()"></textarea>
+      <div class="char-counter" id="counter">0 / 20</div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-send" onclick="sendWA()" data-i18n="btn-send">Enviar</button>
+      <button class="btn-cancel" onclick="closeModal()" data-i18n="btn-cancel">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ─── TRANSLATIONS ─── */
+  const i18n = {
+    es: {
+      quote: '"La tarea de la ciencia es describir los movimientos de la naturaleza de la manera más completa y simple posible."',
+      tagline: 'Data · Tecnología · Vida',
+      'label-who': '01 — Quién soy',
+      'title-who': '¿Quién soy?',
+      'body-who': 'Ingeniera en sistemas, especialista en análisis de datos y Big Data. Me encanta dar clases y uso mi formación tecnológica para armar mis propios proyectos y emprender en paralelo. No me rindo con nada.',
+      'label-causes': '02 — Ideología',
+      'title-causes': 'Ideología & Causas',
+      'body-causes': 'Comprometida al 100% con las causas sociales, el medioambiente y los animales.',
+      'label-sport': '03 — Disciplinas',
+      'title-sport': 'Mis Disciplinas & Deporte',
+      'body-sport': 'Practico Kung Fu, boxeo y salgo a correr. Además, me encantaría gestionar mi Diabetes con la misma rigurosidad con la que mido y grafico un pipeline de datos.',
+      'label-care': '04 — Estética',
+      'title-care': 'Estética & Autocuidado',
+      'body-care': 'Me encanta el autocuidado. Mi casa es mi templo; me fascina la decoración, mantener todo limpio, cocinar y cuidar mis plantas.',
+      'label-books': '05 — Cultura',
+      'title-books': 'Libros, Idiomas & Viajes',
+      'body-books': 'Amo viajar y conocer culturas de primera mano. Estudio idiomas activamente, escribo y leo mucho (sobre todo narrativas existenciales y de alienación).',
+      'label-spirit': '06 — Espiritualidad',
+      'title-spirit': 'Espiritualidad',
+      'body-spirit': 'Me apasiona cruzar e investigar muchísimas cosmogonías y religiones antiguas.',
+      'footer-copy': '© 2025 María Victoria Perera',
+      'modal-title': 'Hablemos',
+      'modal-sub': 'vía WhatsApp',
+      'field-name': 'Nombre',
+      'field-entity': 'Entidad / Empresa',
+      'field-msg': 'Mensaje',
+      'btn-send': 'Enviar',
+      'btn-cancel': 'Cancelar',
+      'msg-max': 'máx. 20 caracteres',
+      'alert-fill': 'Por favor completá todos los campos.',
+    },
+    pt: {
+      quote: '"A tarefa da ciência é descrever os movimentos da natureza da maneira mais completa e simples possível."',
+      tagline: 'Dados · Tecnologia · Vida',
+      'label-who': '01 — Quem sou',
+      'title-who': 'Quem sou?',
+      'body-who': 'Engenheira de sistemas, especialista em análise de dados e Big Data. Adoro dar aulas e uso minha formação tecnológica para criar meus próprios projetos e empreender em paralelo. Nunca desisto de nada.',
+      'label-causes': '02 — Ideologia',
+      'title-causes': 'Ideologia & Causas',
+      'body-causes': '100% comprometida com causas sociais, o meio ambiente e os animais.',
+      'label-sport': '03 — Disciplinas',
+      'title-sport': 'Minhas Disciplinas & Esporte',
+      'body-sport': 'Pratico Kung Fu, boxe e saio para correr. Além disso, adoraria gerenciar meu Diabetes com o mesmo rigor com que meço e grafico um pipeline de dados.',
+      'label-care': '04 — Estética',
+      'title-care': 'Estética & Autocuidado',
+      'body-care': 'Adoro o autocuidado. Minha casa é meu templo; me fascina a decoração, manter tudo limpo, cozinhar e cuidar das minhas plantas.',
+      'label-books': '05 — Cultura',
+      'title-books': 'Livros, Idiomas & Viagens',
+      'body-books': 'Amo viajar e conhecer culturas de perto. Estudo idiomas ativamente, escrevo e leio muito (especialmente narrativas existenciais e de alienação).',
+      'label-spirit': '06 — Espiritualidade',
+      'title-spirit': 'Espiritualidade',
+      'body-spirit': 'Me apaixona cruzar e investigar muitíssimas cosmogonias e religiões antigas.',
+      'footer-copy': '© 2025 María Victoria',
+      'modal-title': 'Vamos conversar',
+      'modal-sub': 'via WhatsApp',
+      'field-name': 'Nome',
+      'field-entity': 'Entidade / Empresa',
+      'field-msg': 'Mensagem',
+      'btn-send': 'Enviar',
+      'btn-cancel': 'Cancelar',
+      'msg-max': 'máx. 20 caracteres',
+      'alert-fill': 'Por favor, preencha todos os campos.',
+    },
+    en: {
+      quote: '"The task of science is to describe the movements of nature in the most complete and simple way possible."',
+      tagline: 'Data · Technology · Life',
+      'label-who': '01 — About me',
+      'title-who': 'Who am I?',
+      'body-who': 'Systems engineer, specialist in data analysis and Big Data. I love teaching and use my tech background to build my own projects and run parallel ventures. I never give up on anything.',
+      'label-causes': '02 — Ideology',
+      'title-causes': 'Ideology & Causes',
+      'body-causes': '100% committed to social causes, the environment, and animals.',
+      'label-sport': '03 — Disciplines',
+      'title-sport': 'My Disciplines & Sport',
+      'body-sport': 'I practice Kung Fu, boxing, and go running. I would also love to manage my Diabetes with the same rigor I use to measure and chart a data pipeline.',
+      'label-care': '04 — Aesthetics',
+      'title-care': 'Aesthetics & Self-Care',
+      'body-care': 'I love self-care. My home is my temple; I\'m fascinated by decoration, keeping everything clean, cooking, and tending my plants.',
+      'label-books': '05 — Culture',
+      'title-books': 'Books, Languages & Travel',
+      'body-books': 'I love traveling and experiencing cultures firsthand. I actively study languages, write, and read a lot (especially existential and alienation narratives).',
+      'label-spirit': '06 — Spirituality',
+      'title-spirit': 'Spirituality',
+      'body-spirit': 'I am passionate about crossing and researching countless cosmogonies and ancient religions.',
+      'footer-copy': '© 2025 María Victoria',
+      'modal-title': "Let's talk",
+      'modal-sub': 'via WhatsApp',
+      'field-name': 'Name',
+      'field-entity': 'Entity / Company',
+      'field-msg': 'Message',
+      'btn-send': 'Send',
+      'btn-cancel': 'Cancel',
+      'msg-max': 'max. 20 characters',
+      'alert-fill': 'Please fill in all fields.',
+    }
+  };
+
+  let currentLang = 'es';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (i18n[lang][key]) el.textContent = i18n[lang][key];
+    });
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+  /* ─── MODAL ─── */
+  function openModal() {
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+
+  function updateCounter() {
+    const msg = document.getElementById('f-msg').value;
+    const counter = document.getElementById('counter');
+    counter.textContent = `${msg.length} / 20`;
+    counter.classList.toggle('warn', msg.length >= 18);
+  }
+
+  function sendWA() {
+    const name = document.getElementById('f-name').value.trim();
+    const entity = document.getElementById('f-entity').value.trim();
+    const msg = document.getElementById('f-msg').value.trim();
+    if (!name || !entity || !msg) {
+      alert(i18n[currentLang]['alert-fill']);
+      return;
+    }
+    const text = encodeURIComponent(`¡Hola soy ${name} de ${entity} y ${msg}!`);
+    window.open(`https://wa.me/59895528728?text=${text}`, '_blank');
+    closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
