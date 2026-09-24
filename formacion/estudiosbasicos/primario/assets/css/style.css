@@ -1,0 +1,129 @@
+:root {
+  --blanco: #FFFFFF;
+  --negro: #000000;
+  --gris-oscuro: #333333;
+  --gris-medio: #555555;
+  --ciruela: #581845;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  max-width: 780px;
+  background-color: var(--blanco);
+  color: var(--negro);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--ciruela);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.site-header h1 {
+  font-size: 2rem;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.25rem 0;
+}
+
+.subtitle {
+  color: var(--gris-oscuro);
+  margin: 0;
+}
+
+.meta {
+  color: var(--gris-medio);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.indice {
+  border: 1px solid var(--gris-medio);
+  padding: 1rem 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.indice h2 {
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin-top: 0;
+  border-bottom: none;
+}
+
+.indice ol {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+
+.indice a {
+  color: var(--negro);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.indice a:hover {
+  border-bottom-color: var(--ciruela);
+}
+
+main section {
+  margin-bottom: 3rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  border-bottom: 1px solid var(--ciruela);
+  padding-bottom: 0.3rem;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: normal;
+  color: var(--gris-oscuro);
+  margin-bottom: 0.3rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--ciruela);
+}
+
+.diploma-viewer {
+  border: 1px solid var(--gris-medio);
+  padding: 0.5rem;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.diploma-viewer img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.2s ease-out;
+  transform-origin: top left;
+}
+
+footer {
+  border-top: 1px solid var(--ciruela);
+  padding-top: 1rem;
+  margin-top: 3rem;
+  color: var(--gris-medio);
+  font-size: 0.9rem;
+}
