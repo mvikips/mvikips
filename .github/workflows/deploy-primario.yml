@@ -19,7 +19,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-primario
+  group: pages
   cancel-in-progress: false
 
 jobs:
@@ -31,37 +31,20 @@ jobs:
 
       - name: Preparar carpeta de publicación
         run: |
+          rm -rf _site
           mkdir -p _site
-          cp -r formacion/estudiosbasicos/primario/. _site/
-
-      # ---------------------------------------------------------------
-      # BLOQUE OPCIONAL: ejecución de notebooks con Papermill
-      # Activar cuando exista un .ipynb en notebook/
-      # ---------------------------------------------------------------
-      # - name: Set up Python
-      #   uses: actions/setup-python@v5
-      #   with:
-      #     python-version: '3.11'
-      #     cache: 'pip'
-      #
-      # - name: Install notebook dependencies
-      #   run: |
-      #     python -m pip install --upgrade pip
-      #     pip install jupyter nbconvert papermill pandas numpy matplotlib seaborn scikit-learn ipykernel
-      #
-      # - name: Execute and convert notebook to HTML
-      #   run: |
-      #     find "formacion/estudiosbasicos/primario/notebook" -name "*.ipynb" -print0 | \
-      #     while IFS= read -r -d '' notebook; do
-      #       base_name=$(basename "$notebook" .ipynb)
-      #       executed="_site/notebook/${base_name}_executed.ipynb"
-      #       papermill "$notebook" "$executed" --log-output --cwd "$(dirname "$notebook")" || continue
-      #       jupyter nbconvert --to html \
-      #         --output-dir=_site/notebook \
-      #         --output "${base_name}" \
-      #         "$executed" || continue
-      #     done
-      # ---------------------------------------------------------------
+          rsync -av --delete \
+                --exclude='.git' \
+                --exclude='.github' \
+                --exclude='node_modules' \
+                --exclude='_site' \
+                ./ _site/
+          touch _site/.nojekyll
+          sync
+          echo "=== Contenido de _site/ ==="
+          find _site -type f
+          echo "=== Tamaño total ==="
+          du -sh _site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
