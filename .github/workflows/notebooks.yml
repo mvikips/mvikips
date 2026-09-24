@@ -1,0 +1,61 @@
+name: Notebooks CI
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'mis_apuntes_de/**'
+      - '.github/workflows/notebooks.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'mis_apuntes_de/**'
+      - '.github/workflows/notebooks.yml'
+  workflow_dispatch:
+
+jobs:
+  execute-and-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jupyter nbconvert papermill pandas scikit-learn matplotlib seaborn numpy ipykernel
+
+      - name: Create output directories
+        run: |
+          mkdir -p artifacts/executed
+          mkdir -p artifacts/html
+
+      - name: Execute notebooks with Papermill and convert to HTML
+        run: |
+          find "mis_apuntes_de" -name "*.ipynb" -print0 | while IFS= read -r -d '' notebook; do
+            base_name=$(basename "$notebook" .ipynb)
+            executed_nb="artifacts/executed/${base_name}_executed.ipynb"
+            papermill "$notebook" "$executed_nb" --log-output --cwd "$(dirname "$notebook")" || continue
+            jupyter nbconvert --to html --output-dir=artifacts/html --output "${base_name}" "$executed_nb" || continue
+          done
+
+      - name: Upload executed notebooks
+        uses: actions/upload-artifact@v4
+        with:
+          name: notebooks-executed
+          path: artifacts/executed/
+          retention-days: 14
+
+      - name: Upload HTML reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: notebooks-html
+          path: artifacts/html/
+          retention-days: 14
