@@ -1,0 +1,81 @@
+name: Deploy Primario
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'formacion/estudiosbasicos/primario/**'
+      - '.github/workflows/deploy-primario.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'formacion/estudiosbasicos/primario/**'
+      - '.github/workflows/deploy-primario.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-primario
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Preparar carpeta de publicación
+        run: |
+          mkdir -p _site
+          cp -r formacion/estudiosbasicos/primario/. _site/
+
+      # ---------------------------------------------------------------
+      # BLOQUE OPCIONAL: ejecución de notebooks con Papermill
+      # Activar cuando exista un .ipynb en notebook/
+      # ---------------------------------------------------------------
+      # - name: Set up Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.11'
+      #     cache: 'pip'
+      #
+      # - name: Install notebook dependencies
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install jupyter nbconvert papermill pandas numpy matplotlib seaborn scikit-learn ipykernel
+      #
+      # - name: Execute and convert notebook to HTML
+      #   run: |
+      #     find "formacion/estudiosbasicos/primario/notebook" -name "*.ipynb" -print0 | \
+      #     while IFS= read -r -d '' notebook; do
+      #       base_name=$(basename "$notebook" .ipynb)
+      #       executed="_site/notebook/${base_name}_executed.ipynb"
+      #       papermill "$notebook" "$executed" --log-output --cwd "$(dirname "$notebook")" || continue
+      #       jupyter nbconvert --to html \
+      #         --output-dir=_site/notebook \
+      #         --output "${base_name}" \
+      #         "$executed" || continue
+      #     done
+      # ---------------------------------------------------------------
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
